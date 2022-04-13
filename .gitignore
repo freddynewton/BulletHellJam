@@ -28,6 +28,9 @@
 # Visual Studio Code config file
 .vscode
 
+# User Settings file
+UserSettings
+
 # Gradle cache directory
 .gradle/
 
@@ -63,4 +66,3 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
-
