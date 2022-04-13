@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
 {
     private Vector2 DirectionVector { get; set; }
     [SerializeField] private Rigidbody2D Rigidbody2D;
+    [SerializeField] private float MovementSpeed;
+
+    [SerializeField] private float DashTime;
 
     private bool isMoving { get; set; }
     private Vector2 InputVector { get; set; }
@@ -34,8 +37,8 @@ public class PlayerMovement : MonoBehaviour
     private void ApplyMovementVector()
     {
         Vector2 currentPos = Rigidbody2D.position;
-        //Vector2 adjustedMovement = InputVector * PlayerManager.Instance.BaseMovementSpeed;
-        //Rigidbody2D.MovePosition(currentPos + adjustedMovement * Time.fixedDeltaTime);
+        Vector2 adjustedMovement = InputVector * MovementSpeed;
+        Rigidbody2D.MovePosition(currentPos + adjustedMovement * Time.fixedDeltaTime);
     }
 
     private void GetDirectionVector()
@@ -48,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (currentDashTime <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
-            //currentDashTime = PlayerManager.Instance.DashTime;
+            currentDashTime = DashTime;
             isMoving = false;
 
             // Player is dashing
