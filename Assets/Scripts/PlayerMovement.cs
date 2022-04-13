@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,8 +34,8 @@ public class PlayerMovement : MonoBehaviour
     private void ApplyMovementVector()
     {
         Vector2 currentPos = Rigidbody2D.position;
-        Vector2 adjustedMovement = InputVector * PlayerManager.Instance.BaseMovementSpeed;
-        Rigidbody2D.MovePosition(currentPos + adjustedMovement * Time.fixedDeltaTime);
+        //Vector2 adjustedMovement = InputVector * PlayerManager.Instance.BaseMovementSpeed;
+        //Rigidbody2D.MovePosition(currentPos + adjustedMovement * Time.fixedDeltaTime);
     }
 
     private void GetDirectionVector()
@@ -48,13 +48,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (currentDashTime <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
-            currentDashTime = PlayerManager.Instance.DashTime;
+            //currentDashTime = PlayerManager.Instance.DashTime;
             isMoving = false;
 
             // Player is dashing
             // statHandler.canInteract = true;
             var tempInputVec = InputVector;
-            Rigidbody2D.velocity = tempInputVec * PlayerManager.Instance.BaseDashSpeed;
+            //Rigidbody2D.velocity = tempInputVec * PlayerManager.Instance.BaseDashSpeed;
 
             // rb.AddForce(inputVector * statHandler.dashSpeed, ForceMode2D.Impulse);
         }
