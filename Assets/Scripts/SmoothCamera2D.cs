@@ -10,6 +10,5 @@ public class SmoothCamera2D : Singleton<SmoothCamera2D>
 
     private void OnDrawGizmosSelected()
     {
-        
     }
 }

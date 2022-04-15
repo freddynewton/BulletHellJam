@@ -7,15 +7,21 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField]
+    private Rigidbody2D rigidbody2D;
+
+    [SerializeField]
+    private float movementSpeed;
+
+    [SerializeField] private float dashTime;
+
     private Vector2 DirectionVector { get; set; }
-    [SerializeField] private Rigidbody2D Rigidbody2D;
-    [SerializeField] private float MovementSpeed;
 
-    [SerializeField] private float DashTime;
+    private bool IsMoving { get; set; }
 
-    private bool isMoving { get; set; }
     private Vector2 InputVector { get; set; }
-    private float currentDashTime { get; set; }
+
+    private float CurrentDashTime { get; set; }
 
     private void Update()
     {
@@ -28,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
         Dash();
 
-        if (currentDashTime <= 0)
+        if (CurrentDashTime <= 0)
         {
             ApplyMovementVector();
         }
@@ -36,23 +42,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyMovementVector()
     {
-        Vector2 currentPos = Rigidbody2D.position;
-        Vector2 adjustedMovement = InputVector * MovementSpeed;
-        Rigidbody2D.MovePosition(currentPos + adjustedMovement * Time.fixedDeltaTime);
+        Vector2 currentPos = rigidbody2D.position;
+        Vector2 adjustedMovement = InputVector * movementSpeed;
+        rigidbody2D.MovePosition(currentPos + adjustedMovement * Time.fixedDeltaTime);
     }
 
     private void GetDirectionVector()
     {
         InputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        isMoving = (InputVector != Vector2.zero) ? true : false;
+        IsMoving = (InputVector != Vector2.zero) ? true : false;
     }
 
     private void Dash()
     {
-        if (currentDashTime <= 0 && Input.GetKeyDown(KeyCode.Space))
+        if (CurrentDashTime <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
-            currentDashTime = DashTime;
-            isMoving = false;
+            CurrentDashTime = dashTime;
+            IsMoving = false;
 
             // Player is dashing
             // statHandler.canInteract = true;
@@ -61,9 +67,9 @@ public class PlayerMovement : MonoBehaviour
 
             // rb.AddForce(inputVector * statHandler.dashSpeed, ForceMode2D.Impulse);
         }
-        else if (currentDashTime >= 0)
+        else if (CurrentDashTime >= 0)
         {
-            currentDashTime -= Time.deltaTime;
+            CurrentDashTime -= Time.deltaTime;
         }
     }
 

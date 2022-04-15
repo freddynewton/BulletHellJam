@@ -1,12 +1,12 @@
-using UnityEngine.SceneManagement;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.UI;
-
 namespace FreddyNewton.Utility.SceneManagement
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
+    using UnityEngine.UI;
+
     /// <summary>
     /// Singleton Scene Manager.
     /// A centralized script to control clean loading of additive scenes.
@@ -15,21 +15,21 @@ namespace FreddyNewton.Utility.SceneManagement
     /// </summary>
     public class SceneManagementController : Singleton<SceneManagementController>
     {
-        [SerializeField] private string LoadingScene = "LoadingScene";
-        [SerializeField] private SceneContainer StartUpSceneContainer;
+        [SerializeField] private string loadingScene = "LoadingScene";
+        [SerializeField] private SceneContainer startUpSceneContainer;
 
-        private List<SceneContainer> SceneContainers = new List<SceneContainer>();
-        private SceneContainer CurrentSceneContainer;
+        private List<SceneContainer> sceneContainers = new List<SceneContainer>();
+        private SceneContainer currentSceneContainer;
 
         /// <summary>
         /// Unloads first all additive loaded Scenes.
-        /// Loads based of the title all new Scenes
+        /// Loads based of the title all new Scenes.
         /// </summary>
         /// <param name="title">Search parameter to get the right <see cref="SceneContainer"/></param>
         public void LoadScenes(string title)
         {
             // find the searched SceneContainer by the title
-            var searchedSceneContainer = SceneContainers.Find(scene => scene.Title == title);
+            var searchedSceneContainer = this.sceneContainers.Find(scene => scene.Title == title);
 
             if (searchedSceneContainer == null || searchedSceneContainer.Scenes.Length == 0)
             {
@@ -38,9 +38,9 @@ namespace FreddyNewton.Utility.SceneManagement
             }
 
             // After Loading Scene is loaded, unload all current scenes and load the new ones
-            SceneManager.LoadSceneAsync(LoadingScene, LoadSceneMode.Additive).completed += async _ =>
+            SceneManager.LoadSceneAsync(this.loadingScene, LoadSceneMode.Additive).completed += async _ =>
             {
-                await UnloadAllScenes();
+                await this.UnloadAllScenes();
 
                 foreach (var scene in searchedSceneContainer.Scenes)
                 {
@@ -52,10 +52,10 @@ namespace FreddyNewton.Utility.SceneManagement
                 }
 
                 // Setup new current scene container
-                CurrentSceneContainer = searchedSceneContainer;
+                this.currentSceneContainer = searchedSceneContainer;
 
                 // Unload loading scene
-                var asyncOperationLoadingScene = SceneManager.UnloadSceneAsync(LoadingScene);
+                var asyncOperationLoadingScene = SceneManager.UnloadSceneAsync(this.loadingScene);
                 while (!asyncOperationLoadingScene.isDone)
                 {
                     await Task.Yield();
@@ -66,7 +66,7 @@ namespace FreddyNewton.Utility.SceneManagement
         public void LoadScenes(string title, Slider slider)
         {
             // find the searched SceneContainer by the title
-            var searchedSceneContainer = SceneContainers.Find(scene => scene.Title == title);
+            var searchedSceneContainer = this.sceneContainers.Find(scene => scene.Title == title);
 
             if (searchedSceneContainer == null || searchedSceneContainer.Scenes.Length == 0)
             {
@@ -75,14 +75,14 @@ namespace FreddyNewton.Utility.SceneManagement
             }
 
             // After Loading Scene is loaded, unload all current scenes and load the new ones
-            SceneManager.LoadSceneAsync(LoadingScene, LoadSceneMode.Additive).completed += async _ =>
+            SceneManager.LoadSceneAsync(this.loadingScene, LoadSceneMode.Additive).completed += async _ =>
             {
                 // Setup Slider
                 slider.value = 0;
                 slider.maxValue = 1;
                 slider.wholeNumbers = false;
 
-                await UnloadAllScenes();
+                await this.UnloadAllScenes();
 
                 foreach (var scene in searchedSceneContainer.Scenes)
                 {
@@ -99,10 +99,10 @@ namespace FreddyNewton.Utility.SceneManagement
                 }
 
                 // Setup new current scene container
-                CurrentSceneContainer = searchedSceneContainer;
+                this.currentSceneContainer = searchedSceneContainer;
 
                 // Unload loading scene
-                var asyncOperationLoadingScene = SceneManager.UnloadSceneAsync(LoadingScene);
+                var asyncOperationLoadingScene = SceneManager.UnloadSceneAsync(this.loadingScene);
                 while (!asyncOperationLoadingScene.isDone)
                 {
                     await Task.Yield();
@@ -117,29 +117,29 @@ namespace FreddyNewton.Utility.SceneManagement
                 };
             }
 
-            CurrentSceneContainer = searchedSceneContainer;
+            this.currentSceneContainer = searchedSceneContainer;
 
-            SceneManager.UnloadSceneAsync(LoadingScene);
+            SceneManager.UnloadSceneAsync(this.loadingScene);
         }
 
         /// <summary>
-        /// Await function
+        /// Await function.
         /// </summary>
         private async void Awake()
         {
-            this.SceneContainers = Resources.LoadAll<SceneContainer>("Utility/SceneContainers").ToList();
-            LoadScenes(StartUpSceneContainer.Title);
+            this.sceneContainers = Resources.LoadAll<SceneContainer>("Utility/SceneContainers").ToList();
+            this.LoadScenes(this.startUpSceneContainer.Title);
         }
 
         /// <summary>
-        /// Unloads all scenes from the <see cref="CurrentSceneContainer"/>
+        /// Unloads all scenes from the <see cref="currentSceneContainer"/>.
         /// </summary>
         /// <returns>AsyncTaks</returns>
         private async Task UnloadAllScenes()
         {
-            if (CurrentSceneContainer == null) return;
+            if (currentSceneContainer == null) return;
 
-            foreach (var scene in CurrentSceneContainer.Scenes)
+            foreach (var scene in currentSceneContainer.Scenes)
             {
                 var asyncOperation = SceneManager.UnloadSceneAsync(scene);
                 while (!asyncOperation.isDone)
