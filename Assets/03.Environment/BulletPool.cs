@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
+    [SerializeField] private GameObject player;
     [SerializeField] private GameObject bullet;
     private int bulletAmount = 50;
     private GameObject[] bullets;
@@ -20,16 +21,28 @@ public class BulletPool : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
-            ShootBullets();
+            ShootRow();
     }
 
-    private void ShootBullets()
+    private void ShootRow()
     {
-        for (int i = 0; i < 5; i++)
+        int offset = 2;
+        int bulletCount = 9;
+        for (int i = 0; i < bulletCount; i++)
         {
-            bullets[i].transform.position = new Vector2(Random.Range(-6f, 6f), 20);
+            Vector2 bulletPosition;
+            bulletPosition.x = player.transform.position.x - offset * (i - bulletCount / 2);
+            bulletPosition.y = 10f;
+            bullets[i].transform.position = bulletPosition;
             bullets[i].SetActive(true);
-            bullets[i].GetComponent<Bullet>().Initialize();
         }
+    }
+
+    private void ShootSector()
+    {
+    }
+
+    private void ShootStrafing()
+    {
     }
 }

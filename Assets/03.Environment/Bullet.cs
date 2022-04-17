@@ -19,10 +19,4 @@ public class Bullet : MonoBehaviour
     {
         rb.velocity = transform.right * moveSpeed;
     }
-
-    public void Initialize()
-    {
-        Vector3 direction = new Vector3(0f, 0f, Random.Range(-40f, 40f));
-        transform.Rotate(direction);
-    }
 }
