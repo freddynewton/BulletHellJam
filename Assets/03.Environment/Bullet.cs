@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private float moveSpeed;
+
     private void OnEnable()
     {
         // TODO: Initialize bullet's fire direction
 
-        Debug.Log("Bullet enabled");
+        rb.velocity = Vector2.down * moveSpeed;
     }
 }
