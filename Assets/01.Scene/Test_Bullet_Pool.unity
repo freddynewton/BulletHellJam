@@ -319,7 +319,7 @@ MonoBehaviour:
   fireSource: {fileID: 177277342}
   bullet: {fileID: 2405340345051663379, guid: 3af452cea07fd14478e2cb55bf63b3ee, type: 3}
   rowWaves: 6
-  sectorWaves: 1
+  sectorWaves: 5
 --- !u!1001 &5214784245617642956
 PrefabInstance:
   m_ObjectHideFlags: 0
