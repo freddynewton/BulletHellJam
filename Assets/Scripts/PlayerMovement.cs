@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private float movementSpeed;
 
     [SerializeField] private float dashTime;
+    [SerializeField] private float dashSpeed;
 
     private Vector2 DirectionVector { get; set; }
 
@@ -58,14 +59,11 @@ public class PlayerMovement : MonoBehaviour
         if (CurrentDashTime <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
             CurrentDashTime = dashTime;
-            IsMoving = false;
+            IsMoving = true;
 
             // Player is dashing
-            // statHandler.canInteract = true;
             var tempInputVec = InputVector;
-            //Rigidbody2D.velocity = tempInputVec * PlayerManager.Instance.BaseDashSpeed;
-
-            // rb.AddForce(inputVector * statHandler.dashSpeed, ForceMode2D.Impulse);
+            rigidbody2D.velocity = tempInputVec * dashSpeed;
         }
         else if (CurrentDashTime >= 0)
         {
