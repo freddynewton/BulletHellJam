@@ -6,22 +6,32 @@ public class BulletPool : MonoBehaviour
 {
     [SerializeField] private GameObject fireSource;
     [SerializeField] private GameObject bullet;
-    private List<GameObject> rowPool = new List<GameObject>();
+    // private List<GameObject> rowPool = new List<GameObject>();
+    private GameObject[][] rowPool;
     [SerializeField] private int rowWaves;
-    private int rowPoolCount;
+    private int rowPerWaves = 11;
     private List<GameObject> sectorPool = new List<GameObject>();
     [SerializeField] private int sectorWaves;
     private int sectorPoolCount;
 
     private void Start()
     {
-        rowPoolCount = rowWaves * 11;
-        for (int i = 0; i < rowPoolCount; i++)
+        rowPool = new GameObject[rowWaves][];
+
+        for (int i = 0; i < rowPool.Length; i++)
         {
-            GameObject rowBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-            rowPool.Add(rowBullet);
-            rowBullet.SetActive(false);
-            rowBullet.transform.parent = transform;
+            rowPool[i] = new GameObject[rowPerWaves];
+        }
+
+        for (int i = 0; i < rowWaves; i++)
+        {
+            for (int j = 0; j < rowPerWaves; j++)
+            {
+                GameObject rowBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                rowPool[i][j] = rowBullet;
+                rowPool[i][j].SetActive(true);
+                rowPool[i][j].transform.parent = transform;
+            }
         }
 
         sectorPoolCount = sectorWaves * 9;
@@ -47,14 +57,14 @@ public class BulletPool : MonoBehaviour
         int gap = 2;
         for (int i = 0; i < rowWaves; i++)
         {
-            for (int j = i * 11; j < i * 11 + 11; j++)
+            for (int j = 0; j < rowPerWaves; j++)
             {
                 Vector2 bulletPosition;
-                bulletPosition.x = fireSource.transform.position.x - gap * (rowPoolCount / (rowWaves * 2)) + gap * (j - i * 11);
+                bulletPosition.x = fireSource.transform.position.x - gap * (rowPerWaves / 2) + gap * j;
                 bulletPosition.y = fireSource.transform.position.y;
 
-                rowPool[j].transform.position = bulletPosition;
-                rowPool[j].SetActive(true);
+                rowPool[i][j].transform.position = bulletPosition;
+                rowPool[i][j].SetActive(true);
             }
 
             yield return new WaitForSeconds(0.2f);
