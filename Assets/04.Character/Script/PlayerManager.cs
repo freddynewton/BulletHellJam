@@ -1,14 +1,33 @@
+using System;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Bullet")
-        {
-            // TODO: Player death event
+    public static event Action OnPlayerDeath;
+    [SerializeField] private int maxHealth;
+    private int currentHealth;
 
-            Debug.Log("Die");
+    private void Start()
+    {
+        currentHealth = maxHealth;
+    }
+
+    public void GetHurt(int damage)
+    {
+        if (currentHealth - damage <= 0)
+        {
+            Dead();
+            return;
         }
+        currentHealth -= damage;
+        Debug.Log(currentHealth);
+    }
+
+    private void Dead()
+    {
+        OnPlayerDeath?.Invoke();
+        GetComponent<CapsuleCollider2D>().enabled = false;
+        currentHealth = 0;
+        Debug.Log(currentHealth);
     }
 }
