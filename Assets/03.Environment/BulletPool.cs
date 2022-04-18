@@ -1,49 +1,75 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
-    [SerializeField] private GameObject player; // ! Just for testing, should base on firewall
+    [SerializeField] private GameObject fireSource;
     [SerializeField] private GameObject bullet;
-    private Queue<GameObject> rowPool = new Queue<GameObject>();
-    [SerializeField] private int rowPoolCount;
+    private List<GameObject> rowPool = new List<GameObject>();
+    [SerializeField] private int rowWaves;
+    private int rowPoolCount;
+    private List<GameObject> sectorPool = new List<GameObject>();
+    [SerializeField] private int sectorWaves;
+    private int sectorPoolCount;
 
     private void Start()
     {
+        rowPoolCount = rowWaves * 11;
         for (int i = 0; i < rowPoolCount; i++)
         {
             GameObject rowBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-            rowPool.Enqueue(rowBullet);
+            rowPool.Add(rowBullet);
             rowBullet.SetActive(false);
             rowBullet.transform.parent = transform;
+        }
+
+        sectorPoolCount = sectorWaves * 9;
+        for (int i = 0; i < sectorPoolCount; i++)
+        {
+            GameObject sectorBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            sectorPool.Add(sectorBullet);
+            sectorBullet.SetActive(false);
+            sectorBullet.transform.parent = transform;
         }
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
-            ShootRow();
+            StartCoroutine(ShootRowCoroutine());
+        if (Input.GetKeyDown(KeyCode.W))
+            ShootSector();
     }
 
-    private void ShootRow()
+    private IEnumerator ShootRowCoroutine()
     {
-        int offset = 2;
-        // TODO: Shoot more than one wave
-        for (int i = 0; i < rowPool.Count; i++)
+        int gap = 2;
+        for (int i = 0; i < rowWaves; i++)
         {
-            Vector2 bulletPosition;
-            GameObject bulletToShoot = rowPool.Dequeue();
-            // TODO: Should base on firewall position
-            bulletPosition.x = player.transform.position.x - offset * (i - rowPool.Count / 2);
-            bulletPosition.y = 10f;
-            bulletToShoot.transform.position = bulletPosition;
-            bulletToShoot.SetActive(true);
-            rowPool.Enqueue(bulletToShoot);
+            for (int j = i * 11; j < i * 11 + 11; j++)
+            {
+                Vector2 bulletPosition;
+                bulletPosition.x = fireSource.transform.position.x - gap * (rowPoolCount / (rowWaves * 2)) + gap * (j - i * 11);
+                bulletPosition.y = fireSource.transform.position.y;
+
+                rowPool[j].transform.position = bulletPosition;
+                rowPool[j].SetActive(true);
+            }
+
+            yield return new WaitForSeconds(0.2f);
         }
     }
 
     private void ShootSector()
     {
+        float angle = 20f;
+        for (int i = 0; i < sectorPoolCount; i++)
+        {
+            sectorPool[i].transform.Rotate(0f, 0f, -4 * angle + i * angle);
+            sectorPool[i].transform.position = fireSource.transform.position;
+            sectorPool[i].SetActive(true);
+        }
     }
 
     private void ShootStrafing()

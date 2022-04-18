@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         // Reset position
-        if (transform.position.y < -20f)
+        if (transform.position.y < -20f || transform.position.y > 20f || transform.position.x < -20f || transform.position.x > 20f)
         {
             transform.position = transform.parent.position;
             gameObject.SetActive(false);
