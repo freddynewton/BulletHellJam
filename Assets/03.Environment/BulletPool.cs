@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletPool : MonoBehaviour
@@ -9,48 +8,14 @@ public class BulletPool : MonoBehaviour
     private GameObject[][] rowPool;
     [SerializeField] private int rowWaves;
     private int rowPerWave = 11;
-    // private List<GameObject> sectorPool = new List<GameObject>();
     private GameObject[][] sectorPool;
     [SerializeField] private int sectorWaves;
     private int sectorPerWave = 9;
 
     private void Start()
     {
-        rowPool = new GameObject[rowWaves][];
-
-        for (int i = 0; i < rowPool.Length; i++)
-        {
-            rowPool[i] = new GameObject[rowPerWave];
-        }
-
-        for (int i = 0; i < rowWaves; i++)
-        {
-            for (int j = 0; j < rowPerWave; j++)
-            {
-                GameObject rowBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                rowPool[i][j] = rowBullet;
-                rowPool[i][j].SetActive(false);
-                rowPool[i][j].transform.parent = transform;
-            }
-        }
-
-        sectorPool = new GameObject[sectorWaves][];
-
-        for (int i = 0; i < sectorWaves; i++)
-        {
-            sectorPool[i] = new GameObject[sectorPerWave];
-        }
-
-        for (int i = 0; i < sectorWaves; i++)
-        {
-            for (int j = 0; j < sectorPerWave; j++)
-            {
-                GameObject sectorBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                sectorPool[i][j] = sectorBullet;
-                sectorPool[i][j].SetActive(false);
-                sectorPool[i][j].transform.parent = transform;
-            }
-        }
+        InitializePool(out rowPool, rowWaves, rowPerWave);
+        InitializePool(out sectorPool, sectorWaves, sectorPerWave);
     }
 
     private void Update()
@@ -64,6 +29,27 @@ public class BulletPool : MonoBehaviour
         {
             StopCoroutine(ShootSectorCoroutine());
             StartCoroutine(ShootSectorCoroutine());
+        }
+    }
+
+    private void InitializePool(out GameObject[][] bulletPool, int waves, int bulletsPerWave)
+    {
+        bulletPool = new GameObject[waves][];
+
+        for (int i = 0; i < waves; i++)
+        {
+            bulletPool[i] = new GameObject[bulletsPerWave];
+        }
+
+        for (int i = 0; i < waves; i++)
+        {
+            for (int j = 0; j < bulletsPerWave; j++)
+            {
+                GameObject bulletToShoot = Instantiate(bullet, transform.position, Quaternion.identity);
+                bulletPool[i][j] = bulletToShoot;
+                bulletPool[i][j].SetActive(false);
+                bulletPool[i][j].transform.parent = transform;
+            }
         }
     }
 
