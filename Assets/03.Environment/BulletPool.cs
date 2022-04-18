@@ -6,7 +6,6 @@ public class BulletPool : MonoBehaviour
 {
     [SerializeField] private GameObject fireSource;
     [SerializeField] private GameObject bullet;
-    // private List<GameObject> rowPool = new List<GameObject>();
     private GameObject[][] rowPool;
     [SerializeField] private int rowWaves;
     private int rowPerWaves = 11;
