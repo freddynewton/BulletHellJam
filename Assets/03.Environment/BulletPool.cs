@@ -1,20 +1,21 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject player; // ! Just for testing, should base on firewall
     [SerializeField] private GameObject bullet;
-    private int bulletAmount = 50;
-    private GameObject[] bullets;
+    private Queue<GameObject> rowPool = new Queue<GameObject>();
+    [SerializeField] private int rowPoolCount;
 
     private void Start()
     {
-        bullets = new GameObject[bulletAmount];
-        for (int i = 0; i < bulletAmount; i++)
+        for (int i = 0; i < rowPoolCount; i++)
         {
-            bullets[i] = Instantiate(bullet, transform.position, bullet.transform.rotation);
-            bullets[i].SetActive(false);
-            bullets[i].transform.parent = gameObject.transform;
+            GameObject rowBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            rowPool.Enqueue(rowBullet);
+            rowBullet.SetActive(false);
+            rowBullet.transform.parent = transform;
         }
     }
 
@@ -27,14 +28,17 @@ public class BulletPool : MonoBehaviour
     private void ShootRow()
     {
         int offset = 2;
-        int bulletCount = 9;
-        for (int i = 0; i < bulletCount; i++)
+        // TODO: Shoot more than one wave
+        for (int i = 0; i < rowPool.Count; i++)
         {
             Vector2 bulletPosition;
-            bulletPosition.x = player.transform.position.x - offset * (i - bulletCount / 2);
+            GameObject bulletToShoot = rowPool.Dequeue();
+            // TODO: Should base on firewall position
+            bulletPosition.x = player.transform.position.x - offset * (i - rowPool.Count / 2);
             bulletPosition.y = 10f;
-            bullets[i].transform.position = bulletPosition;
-            bullets[i].SetActive(true);
+            bulletToShoot.transform.position = bulletPosition;
+            bulletToShoot.SetActive(true);
+            rowPool.Enqueue(bulletToShoot);
         }
     }
 

@@ -287,6 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1193356667}
   bullet: {fileID: 2405340345051663379, guid: 3af452cea07fd14478e2cb55bf63b3ee, type: 3}
+  rowPoolCount: 11
 --- !u!1001 &1193356666
 PrefabInstance:
   m_ObjectHideFlags: 0

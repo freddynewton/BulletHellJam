@@ -17,6 +17,6 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = transform.right * moveSpeed;
+        rb.velocity = -transform.up * moveSpeed;
     }
 }
