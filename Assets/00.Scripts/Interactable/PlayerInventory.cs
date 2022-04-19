@@ -17,21 +17,42 @@ public class PlayerInventory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            foreach (var interactable in interactables.Where(inter => Vector2.Distance(inter.transform.position, transform.position) < inter.InteractRange))
+            var interactable = GetClosestInteractable();
+
+            if (interactable is CookingPot pot)
             {
-                if (interactable is CookingPot pot)
+                taskManager.CurrentItem.enabled = false;
+                pot.Use();
+            }
+            else
+            {
+                currentItem = interactable.Interact();
+                taskManager.CurrentItem.sprite = currentItem.Icon;
+                taskManager.CurrentItem.enabled = true;
+            }
+        }
+    }
+
+    private Interactable GetClosestInteractable()
+    {
+        Interactable temp = null;
+
+        foreach (var interactable in interactables.Where(inter => Vector2.Distance(inter.transform.position, transform.position) < inter.InteractRange))
+        {
+            if (temp == null)
+            {
+                temp = interactable;
+            }
+            else
+            {
+                if (Vector2.Distance(transform.position, interactable.transform.position) < Vector2.Distance(transform.position, temp.transform.position))
                 {
-                    taskManager.CurrentItem.enabled = false;
-                    pot.Use();
-                }
-                else
-                {
-                    currentItem = interactable.Interact();
-                    taskManager.CurrentItem.sprite = currentItem.Icon;
-                    taskManager.CurrentItem.enabled = true;
+                    temp = interactable;
                 }
             }
         }
+
+        return temp;
     }
 
     private void ClearCurrentItem()
