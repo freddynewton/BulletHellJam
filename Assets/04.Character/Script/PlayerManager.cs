@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void GetHurt(int damage)
+    public void GetDamage(int damage)
     {
         if (currentHealth - damage <= 0)
         {

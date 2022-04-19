@@ -58,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CurrentDashTime <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
+            //TODO: Change CollisionLayer
+
             CurrentDashTime = dashTime;
             IsMoving = true;
 
@@ -67,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (CurrentDashTime >= 0)
         {
+            //TODO: Change CollisionLayer
+
             CurrentDashTime -= Time.deltaTime;
         }
     }
