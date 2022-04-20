@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractRange: 3
-  item: {fileID: 11400000, guid: 481b2d5229e865c4398a9720877e8de4, type: 2}
+  item: {fileID: 11400000, guid: 2b1d485b99de84f488ab7c6ee3007241, type: 2}
 --- !u!65 &23862057045699676
 BoxCollider:
   m_ObjectHideFlags: 0
