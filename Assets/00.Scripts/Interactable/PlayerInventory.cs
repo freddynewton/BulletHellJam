@@ -17,20 +17,20 @@ public class PlayerInventory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            var interactable = GetClosestInteractable();
-
-            if (interactable is CookingPot pot)
+            if (Vector2.Distance(cookingPot.transform.position, transform.position) < cookingPot.InteractRange)
             {
                 taskManager.CurrentItem.enabled = false;
-                pot.Use();
-            }
-            else
-            {
-                currentItem = interactable.Interact();
-                taskManager.CurrentItem.sprite = currentItem.Icon;
-                taskManager.CurrentItem.enabled = true;
+                cookingPot.Use();
             }
         }
+    }
+
+    public void ChangeCurrentItem(Item interactableItem)
+    {
+        currentItem = interactableItem;
+
+        taskManager.CurrentItem.sprite = currentItem.Icon;
+        taskManager.CurrentItem.enabled = true;
     }
 
     private Interactable GetClosestInteractable()
