@@ -13,6 +13,8 @@ public class PlayerInventory : MonoBehaviour
 
     public TaskManager taskManager { get; set; }
 
+    private PlayerManager playerManager { get; set; }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -72,12 +74,14 @@ public class PlayerInventory : MonoBehaviour
 
         if (taskManager.TaskList.Count == 0)
         {
+            playerManager.GetHealth(1);
             taskManager.UpdateTaskList();
         }
     }
 
     private void Awake()
     {
+        playerManager = GetComponent<PlayerManager>();
         cookingPot = FindObjectOfType<CookingPot>();
         taskManager = FindObjectOfType<TaskManager>();
         cookingPot.OnCookingPotUse += ClearCurrentItem;

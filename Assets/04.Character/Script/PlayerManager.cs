@@ -3,23 +3,35 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public static event Action OnPlayerDeath;
+    public event Action OnPlayerDeath;
+    public event Action OnPlayerHealthChange;
     [SerializeField] private int maxHealth;
-    private int currentHealth;
 
-    private void Start()
+    public int MaxHealth => maxHealth;
+    public int currentHealth { get; private set; }
+
+    private void Awake()
     {
         currentHealth = maxHealth;
     }
 
     public void GetDamage(int damage)
     {
-        if (currentHealth - damage <= 0)
+        currentHealth -= damage;
+        OnPlayerHealthChange?.Invoke();
+        Debug.Log(currentHealth);
+
+        if (currentHealth <= 0)
         {
             Dead();
             return;
         }
-        currentHealth -= damage;
+    }
+
+    public void GetHealth(int amount)
+    {
+        currentHealth += amount;
+        OnPlayerHealthChange?.Invoke();
         Debug.Log(currentHealth);
     }
 
@@ -27,7 +39,5 @@ public class PlayerManager : MonoBehaviour
     {
         OnPlayerDeath?.Invoke();
         GetComponent<CapsuleCollider2D>().enabled = false;
-        currentHealth = 0;
-        Debug.Log(currentHealth);
     }
 }

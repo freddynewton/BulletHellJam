@@ -132,6 +132,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  FollowZone: {x: 5, y: 3}
   CameraDistance: -10
-  FollowSpeed: 1
+  FollowSpeed: 3
