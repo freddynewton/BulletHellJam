@@ -29,6 +29,11 @@ public class PlayerInventory : MonoBehaviour
     {
         currentItem = interactableItem;
 
+        if (taskManager == null)
+        {
+            taskManager = FindObjectOfType<TaskManager>();
+        }
+
         taskManager.CurrentItem.sprite = currentItem.Icon;
         taskManager.CurrentItem.enabled = true;
     }
