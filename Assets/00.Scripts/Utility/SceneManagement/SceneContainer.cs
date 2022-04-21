@@ -16,6 +16,6 @@ namespace FreddyNewton.Utility.SceneManagement
         /// <summary>
         /// List of strings with scene names.
         /// </summary>
-        public string[] Scenes;
+        public int[] SceneIdxs;
     }
 }

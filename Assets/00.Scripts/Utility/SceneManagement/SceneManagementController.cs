@@ -31,36 +31,57 @@ namespace FreddyNewton.Utility.SceneManagement
             // find the searched SceneContainer by the title
             var searchedSceneContainer = this.sceneContainers.Find(scene => scene.Title == title);
 
-            if (searchedSceneContainer == null || searchedSceneContainer.Scenes.Length == 0)
+            if (searchedSceneContainer == null || searchedSceneContainer.SceneIdxs.Length == 0)
             {
                 Debug.LogWarning("SceneContainer " + title + " not found or empty!");
                 return;
             }
 
-            // After Loading Scene is loaded, unload all current scenes and load the new ones
-            SceneManager.LoadSceneAsync(this.loadingScene, LoadSceneMode.Additive).completed += async _ =>
+            if (!string.IsNullOrEmpty(loadingScene))
             {
-                await this.UnloadAllScenes();
-
-                foreach (var scene in searchedSceneContainer.Scenes)
+                // After Loading Scene is loaded, unload all current scenes and load the new ones
+                SceneManager.LoadSceneAsync(this.loadingScene, LoadSceneMode.Additive).completed += async _ =>
                 {
-                    var asyncOperation = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
-                    while (!asyncOperation.isDone)
+                    await this.UnloadAllScenes();
+
+                    foreach (var scene in searchedSceneContainer.SceneIdxs)
+                    {
+                        var asyncOperation = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+                        while (!asyncOperation.isDone)
+                        {
+                            await Task.Yield();
+                        }
+                    }
+
+                    // Setup new current scene container
+                    this.currentSceneContainer = searchedSceneContainer;
+
+                    // Unload loading scene
+                    var asyncOperationLoadingScene = SceneManager.UnloadSceneAsync(this.loadingScene);
+                    while (!asyncOperationLoadingScene.isDone)
                     {
                         await Task.Yield();
                     }
+                };
+            }
+            else
+            {
+                _ = UnloadAllScenes();
+
+                foreach (var scene in searchedSceneContainer.SceneIdxs)
+                {
+                    var asyncOperation = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+                    
+                    /*while (!asyncOperation.isDone)
+                    {
+                        _ = Task.Yield();
+                    }
+                    */
                 }
 
                 // Setup new current scene container
                 this.currentSceneContainer = searchedSceneContainer;
-
-                // Unload loading scene
-                var asyncOperationLoadingScene = SceneManager.UnloadSceneAsync(this.loadingScene);
-                while (!asyncOperationLoadingScene.isDone)
-                {
-                    await Task.Yield();
-                }
-            };
+            }
         }
 
         public void LoadScenes(string title, Slider slider)
@@ -68,7 +89,7 @@ namespace FreddyNewton.Utility.SceneManagement
             // find the searched SceneContainer by the title
             var searchedSceneContainer = this.sceneContainers.Find(scene => scene.Title == title);
 
-            if (searchedSceneContainer == null || searchedSceneContainer.Scenes.Length == 0)
+            if (searchedSceneContainer == null || searchedSceneContainer.SceneIdxs.Length == 0)
             {
                 Debug.LogWarning("SceneContainer " + title + " not found or empty!");
                 return;
@@ -84,12 +105,12 @@ namespace FreddyNewton.Utility.SceneManagement
 
                 await this.UnloadAllScenes();
 
-                foreach (var scene in searchedSceneContainer.Scenes)
+                foreach (var scene in searchedSceneContainer.SceneIdxs)
                 {
                     var asyncOperation = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
                     asyncOperation.completed += _ =>
                     {
-                        slider.value += 1 / searchedSceneContainer.Scenes.Length;
+                        slider.value += 1 / searchedSceneContainer.SceneIdxs.Length;
                     };
 
                     while (!asyncOperation.isDone)
@@ -109,11 +130,11 @@ namespace FreddyNewton.Utility.SceneManagement
                 }
             };
 
-            foreach (var scene in searchedSceneContainer.Scenes)
+            foreach (var scene in searchedSceneContainer.SceneIdxs)
             {
                 SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive).completed += _ =>
                 {
-                    slider.value += 1 / searchedSceneContainer.Scenes.Length;
+                    slider.value += 1 / searchedSceneContainer.SceneIdxs.Length;
                 };
             }
 
@@ -125,7 +146,7 @@ namespace FreddyNewton.Utility.SceneManagement
         /// <summary>
         /// Await function.
         /// </summary>
-        private async void Awake()
+        private void Awake()
         {
             this.sceneContainers = Resources.LoadAll<SceneContainer>("Utility/SceneContainers").ToList();
             this.LoadScenes(this.startUpSceneContainer.Title);
@@ -139,7 +160,7 @@ namespace FreddyNewton.Utility.SceneManagement
         {
             if (currentSceneContainer == null) return;
 
-            foreach (var scene in currentSceneContainer.Scenes)
+            foreach (var scene in currentSceneContainer.SceneIdxs)
             {
                 var asyncOperation = SceneManager.UnloadSceneAsync(scene);
                 while (!asyncOperation.isDone)
