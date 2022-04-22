@@ -320,6 +320,27 @@ MonoBehaviour:
   bullet: {fileID: 2405340345051663379, guid: 3af452cea07fd14478e2cb55bf63b3ee, type: 3}
   rowWaves: 6
   sectorWaves: 5
+--- !u!1 &1027808903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7552552291355540312, guid: 084550b0ec0c5384c81f9bbd3ef680e1, type: 3}
+  m_PrefabInstance: {fileID: 5214784245617642956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!70 &1027808910
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027808903}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.4, y: 1}
+  m_Direction: 0
 --- !u!1001 &5214784245617642956
 PrefabInstance:
   m_ObjectHideFlags: 0
