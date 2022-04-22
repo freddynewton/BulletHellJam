@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 public class AudioStation : MonoBehaviour
 {
-    [SerializeField] AudioPlayer audioPlayerPrefab;
+    public AudioAssets music, sfx;
+    public AudioPlayer audioPlayerPrefab;
     public static AudioStation Instance { get; private set; }
 
     [HideInInspector] public List<AudioPlayer> audioPlayers = new List<AudioPlayer>();

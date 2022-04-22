@@ -13,17 +13,25 @@ namespace HellsKitchen.Ui
 
         public Button ExitButton;
 
+        AudioStation audioStation;
+
         private void Awake()
         {
             StartButton.onClick.AddListener(() =>
             {
                 SceneManagementController.Instance.LoadScenes(StartButtonContainer.Title);
+                audioStation.StartNewMusicPlayer(audioStation.music.asset[0], true);
             });
 
             StartButton.onClick.AddListener(() =>
             {
                 Application.Quit();
             });
+        }
+
+        void Start()
+        {
+            audioStation = AudioStation.Instance;
         }
     }
 }

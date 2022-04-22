@@ -169,3 +169,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingScene: 
   startUpSceneContainer: {fileID: 11400000, guid: 515cfb8b48ecb0b49bd73ebc946232a4, type: 2}
+--- !u!1 &1064665659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1064665660}
+  - component: {fileID: 1064665661}
+  m_Layer: 0
+  m_Name: AudioStation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1064665660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064665659}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1064665661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064665659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0274cf82ab3683458d4a85b8d20b64c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 11400000, guid: b33193cf5563ebb409ad1373aa9e184c, type: 2}
+  sfx: {fileID: 11400000, guid: 48d6e81620fd01640923460c2e33a13a, type: 2}
+  audioPlayerPrefab: {fileID: 4190236914402708207, guid: 0cc822c0702a2b643a41d8e6c62937f2, type: 3}
+  audioPlayers: []
