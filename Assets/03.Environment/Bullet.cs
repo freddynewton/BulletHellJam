@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
-            other.GetComponent<PlayerManager>().GetDamage(damage);
+        if (other.tag == "BulletDetector")
+            other.GetComponentInParent<PlayerManager>().GetDamage(damage);
     }
 }
