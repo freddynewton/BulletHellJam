@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] private GameObject bulletDetector;
     public event Action OnPlayerDeath;
     public event Action OnPlayerHealthChange;
     [SerializeField] private int maxHealth;
@@ -39,6 +38,6 @@ public class PlayerManager : MonoBehaviour
     private void Dead()
     {
         OnPlayerDeath?.Invoke();
-        bulletDetector.SetActive(false);
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 }

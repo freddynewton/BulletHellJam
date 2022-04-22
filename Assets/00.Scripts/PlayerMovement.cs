@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
@@ -10,19 +11,25 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rigidbody2D;
 
-    [SerializeField]
-    private float movementSpeed;
-
-    [SerializeField] private float dashTime;
-    [SerializeField] private float dashSpeed;
-
-    private Vector2 DirectionVector { get; set; }
-
-    private bool IsMoving { get; set; }
+    #region Walk Variables
 
     private Vector2 InputVector { get; set; }
+    private Vector2 DirectionVector { get; set; }
+    [SerializeField] private float movementSpeed;
+    private bool IsMoving { get; set; }
 
+    #endregion
+
+    #region Dash Variables
+
+    [SerializeField] private float dashTime;
     private float CurrentDashTime { get; set; }
+    [SerializeField] private float dashSpeed;
+    private bool isDashing = false;
+    public UnityEvent onDashStart;
+    [SerializeField] private LayerMask wallMask;
+
+    #endregion
 
     private void Update()
     {
@@ -56,8 +63,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void Dash()
     {
+        // Show the destination of dash
+        Debug.DrawRay(transform.position, InputVector * dashTime * dashSpeed, Color.red);
+
+        if (CurrentDashTime <= 0 && isDashing)
+        {
+            EnableCollider();
+            isDashing = false;
+        }
+
         if (CurrentDashTime <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
+            isDashing = true;
+
+            onDashStart.Invoke();
+
             //TODO: Change CollisionLayer
 
             CurrentDashTime = dashTime;
@@ -75,4 +95,23 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void EnableCollider()
+    {
+        // Check if the destination of dash is in wall (With overlapCapsule)
+        Vector2 destination = (Vector2)transform.position + InputVector * dashSpeed * dashTime;
+        Vector2 size = GetComponent<CapsuleCollider2D>().size;
+        CapsuleDirection2D direction = GetComponent<CapsuleCollider2D>().direction;
+
+        Collider2D[] walls = Physics2D.OverlapCapsuleAll(destination, size, direction, 0f, wallMask);
+
+        Debug.Log(walls);
+
+        // If true then push player onto the platform
+        if (walls.Length > 0)
+        {
+            // Push player onto the platform
+        }
+
+        // Enable Player and BulletDetector collider
+    }
 }
