@@ -74,10 +74,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (CurrentDashTime <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
-            isDashing = true;
-
-            onDashStart.Invoke();
-
             //TODO: Change CollisionLayer
 
             CurrentDashTime = dashTime;
@@ -86,6 +82,9 @@ public class PlayerMovement : MonoBehaviour
             // Player is dashing
             var tempInputVec = InputVector;
             rigidbody2D.velocity = tempInputVec * dashSpeed;
+
+            isDashing = true;
+            onDashStart.Invoke();
         }
         else if (CurrentDashTime >= 0)
         {

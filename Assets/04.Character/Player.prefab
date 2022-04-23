@@ -218,9 +218,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onDashEnd:
-    m_PersistentCalls:
-      m_Calls: []
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &9087255570215709569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,7 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 101514830bea6954ab27c622da679a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDetector: {fileID: 3344796417178023874}
   maxHealth: 100
 --- !u!114 &378303398
 MonoBehaviour:
