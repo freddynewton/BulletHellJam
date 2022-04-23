@@ -4,7 +4,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float moveSpeed;
-    [SerializeField] private int damage;
+    private PlayerManager playerManager;
 
     private void Update()
     {
@@ -23,7 +23,18 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // TODO: JUST USE DIFFERENT PHYSICS LAYER
         if (other.tag == "BulletDetector")
-            other.GetComponentInParent<PlayerManager>().GetDamage(damage);
+        {
+            if (playerManager == null)
+            {
+                playerManager = other.GetComponentInParent<PlayerManager>();
+            }
+
+            playerManager.GetDamage(1);
+
+            // TODO: DESTROY BULLET - RELEASE TO POOL
+        }
+
     }
 }

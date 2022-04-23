@@ -15,11 +15,11 @@ TagManager:
   - UI
   - Wall
   - Platform
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Walkable
+  - FallDown
+  - Walls
+  - BulletDetector
+  - Bullet
   - 
   - 
   - 

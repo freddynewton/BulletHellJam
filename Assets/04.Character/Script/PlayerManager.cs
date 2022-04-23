@@ -7,6 +7,8 @@ public class PlayerManager : MonoBehaviour
     public event Action OnPlayerHealthChange;
     [SerializeField] private int maxHealth;
 
+    public bool isInvincible { get; set; }
+
     public int MaxHealth => maxHealth;
     public int currentHealth { get; private set; }
 
@@ -17,14 +19,17 @@ public class PlayerManager : MonoBehaviour
 
     public void GetDamage(int damage)
     {
-        currentHealth -= damage;
-        OnPlayerHealthChange?.Invoke();
-        Debug.Log(currentHealth);
-
-        if (currentHealth <= 0)
+        if (!isInvincible)
         {
-            Dead();
-            return;
+            currentHealth -= damage;
+            OnPlayerHealthChange?.Invoke();
+            Debug.Log(currentHealth);
+
+            if (currentHealth <= 0)
+            {
+                Dead();
+                return;
+            }
         }
     }
 

@@ -84,6 +84,10 @@ public class PlayerInventory : MonoBehaviour
         playerManager = GetComponent<PlayerManager>();
         cookingPot = FindObjectOfType<CookingPot>();
         taskManager = FindObjectOfType<TaskManager>();
-        cookingPot.OnCookingPotUse += ClearCurrentItem;
+
+        if (cookingPot != null)
+        {
+            cookingPot.OnCookingPotUse += ClearCurrentItem;
+        }
     }
 }

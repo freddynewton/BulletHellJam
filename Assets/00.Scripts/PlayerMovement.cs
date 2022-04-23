@@ -11,24 +11,28 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rigidbody2D;
 
+    public PlayerManager playerManager;
+
     #region Walk Variables
+    [Header("Movement")]
+    [SerializeField] private float movementSpeed;
 
     private Vector2 InputVector { get; set; }
-    private Vector2 DirectionVector { get; set; }
-    [SerializeField] private float movementSpeed;
-    private bool IsMoving { get; set; }
 
+    private bool IsMoving { get; set; }
     #endregion
 
     #region Dash Variables
-
+    [Header("Dash")]
     [SerializeField] private float dashTime;
-    private float CurrentDashTime { get; set; }
-    [SerializeField] private float dashSpeed;
-    private bool isDashing = false;
-    public UnityEvent onDashStart;
-    [SerializeField] private LayerMask wallMask;
 
+    private float CurrentDashTime { get; set; }
+
+    public Vector2 dashStartPoint { get; private set; } = Vector2.zero;
+
+    [SerializeField] private float dashSpeed;
+
+    private bool isDashing = false;
     #endregion
 
     private void Update()
@@ -52,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 currentPos = rigidbody2D.position;
         Vector2 adjustedMovement = InputVector * movementSpeed;
-        rigidbody2D.MovePosition(currentPos + adjustedMovement * Time.fixedDeltaTime);
+        rigidbody2D.MovePosition(currentPos + adjustedMovement * Time.deltaTime);
     }
 
     private void GetDirectionVector()
@@ -66,34 +70,31 @@ public class PlayerMovement : MonoBehaviour
         // Show the destination of dash
         Debug.DrawRay(transform.position, InputVector * dashTime * dashSpeed, Color.red);
 
-        if (CurrentDashTime <= 0 && isDashing)
+        if (CurrentDashTime <= 0 && !isDashing)
         {
-            EnableCollider();
+            playerManager.isInvincible = false;
             isDashing = false;
         }
 
         if (CurrentDashTime <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
-            //TODO: Change CollisionLayer
+            playerManager.isInvincible = true;
 
             CurrentDashTime = dashTime;
-            IsMoving = true;
+            IsMoving = false;
 
             // Player is dashing
             var tempInputVec = InputVector;
             rigidbody2D.velocity = tempInputVec * dashSpeed;
-
-            isDashing = true;
-            onDashStart.Invoke();
         }
-        else if (CurrentDashTime >= 0)
+        else if (CurrentDashTime > 0)
         {
-            //TODO: Change CollisionLayer
-
+            isDashing = true;
             CurrentDashTime -= Time.deltaTime;
         }
     }
 
+    /*
     private void EnableCollider()
     {
         // Check if the destination of dash is in wall (With overlapCapsule)
@@ -113,4 +114,5 @@ public class PlayerMovement : MonoBehaviour
 
         // Enable Player and BulletDetector collider
     }
+    */
 }
