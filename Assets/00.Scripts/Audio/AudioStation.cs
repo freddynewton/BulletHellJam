@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class AudioStation : MonoBehaviour
 {
-    public AudioAssets music, sfx;
+    public AudioAssets music, chefSFX, firebulletSFX;
     public AudioPlayer audioPlayerPrefab;
     public static AudioStation Instance { get; private set; }
 
@@ -16,21 +16,25 @@ public class AudioStation : MonoBehaviour
             Instance = this;
     }
 
-    public void StartNewRandomSFXPlayer(AudioClip[] clips, Vector3 pos = default,
+    public void StartNewRandomSFXPlayer(AudioClip[] clips, Vector3 pos = default, Transform parent = null,
                                         float pitchMin = 1, float pitchMax = 1, bool is2D = false)
     {
         AudioPlayer newAudioPlayer = Instantiate(audioPlayerPrefab, pos, Quaternion.identity);
-        newAudioPlayer.transform.SetParent(transform);
+        if (parent == null)
+            parent = transform;
+        newAudioPlayer.transform.SetParent(parent);
         audioPlayers.Add(newAudioPlayer);
         newAudioPlayer.SetupSFX(clips, pitchMin, pitchMax, is2D);
         newAudioPlayer.Play();
     }
 
-    public void StartNewSFXPlayer(AudioClip clip, Vector3 pos = default,
+    public void StartNewSFXPlayer(AudioClip clip, Vector3 pos = default, Transform parent = null,
                                   float pitchMin = 1, float pitchMax = 1, bool is2D = false)
     {
         AudioPlayer newAudioPlayer = Instantiate(audioPlayerPrefab, pos, Quaternion.identity);
-        newAudioPlayer.transform.SetParent(transform);
+        if (parent == null)
+            parent = transform;
+        newAudioPlayer.transform.SetParent(parent);
         audioPlayers.Add(newAudioPlayer);
         newAudioPlayer.SetupSFX(clip, pitchMin, pitchMax, is2D);
         newAudioPlayer.Play();

@@ -5,5 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Audio Assets")]
 public class AudioAssets : ScriptableObject
 {
-    public AudioClip[] asset;
+    public AudioAsset[] asset;
+}
+
+[System.Serializable]
+public struct AudioAsset
+{
+    public string name;
+    public AudioClip[] audioClips;
 }

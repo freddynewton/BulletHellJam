@@ -25,6 +25,14 @@ public class PlayerManager : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    AudioStation audioStation;
+
+    private void Start()
+    {
+        audioStation = AudioStation.Instance;
+    }
+
+
     public void GetDamage(int damage)
     {
         if (!isInvincibleBullet && !isInvicibleFallDamage)
@@ -38,6 +46,8 @@ public class PlayerManager : MonoBehaviour
                 Dead();
                 return;
             }
+            else
+                audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[2].audioClips, pitchMin: -0.9f, pitchMax: 1.1f, parent: transform);
         }
     }
 
@@ -70,5 +80,6 @@ public class PlayerManager : MonoBehaviour
     {
         OnPlayerDeath?.Invoke();
         transform.GetChild(0).gameObject.SetActive(false);
+        audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[3].audioClips, parent: transform);
     }
 }

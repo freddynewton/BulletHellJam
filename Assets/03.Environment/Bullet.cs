@@ -6,6 +6,14 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float moveSpeed;
     private PlayerManager playerManager;
 
+    AudioStation audioStation;
+
+    private void Start()
+    {
+        audioStation = AudioStation.Instance;
+        audioStation.StartNewRandomSFXPlayer(audioStation.firebulletSFX.asset[0].audioClips, pitchMin: 0.9f, pitchMax: 1.1f, parent: transform);
+    }
+
     private void Update()
     {
         // Reset position

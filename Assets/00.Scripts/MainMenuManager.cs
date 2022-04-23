@@ -20,7 +20,7 @@ namespace HellsKitchen.Ui
             StartButton.onClick.AddListener(() =>
             {
                 SceneManagementController.Instance.LoadScenes(StartButtonContainer.Title);
-                audioStation.StartNewMusicPlayer(audioStation.music.asset[0], true);
+                audioStation.StartNewMusicPlayer(audioStation.music.asset[0].audioClips[0], true);
             });
 
             StartButton.onClick.AddListener(() =>
