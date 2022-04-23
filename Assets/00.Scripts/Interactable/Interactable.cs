@@ -12,6 +12,13 @@ public class Interactable : MonoBehaviour
     public CircleCollider2D collider2D;
     private PlayerInventory playerInventory;
 
+    AudioStation audioStation;
+
+    private void Start()
+    {
+        audioStation = AudioStation.Instance;
+    }
+
     public virtual Item Interact()
     {
         if (item == null)
@@ -19,6 +26,7 @@ public class Interactable : MonoBehaviour
             Debug.LogError($"{item} is null");
         }
 
+        audioStation.StartNewRandomSFXPlayer(audioStation.ingredientSFX.asset[0].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
         SquishSquashAnimation(true);
 
         return item;
@@ -26,6 +34,7 @@ public class Interactable : MonoBehaviour
 
     public virtual void Use()
     {
+
         SquishSquashAnimation(false);
     }
 

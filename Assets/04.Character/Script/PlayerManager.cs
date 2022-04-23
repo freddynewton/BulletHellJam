@@ -47,7 +47,7 @@ public class PlayerManager : MonoBehaviour
                 return;
             }
             else
-                audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[2].audioClips, pitchMin: -0.9f, pitchMax: 1.1f, parent: transform);
+                audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[2].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
         }
     }
 
@@ -80,6 +80,11 @@ public class PlayerManager : MonoBehaviour
     {
         OnPlayerDeath?.Invoke();
         transform.GetChild(0).gameObject.SetActive(false);
-        audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[3].audioClips, parent: transform);
+        audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[3].audioClips);
+    }
+
+    public void PlayFootstepSFX()
+    {
+        audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[0].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
     }
 }

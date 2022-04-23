@@ -15,6 +15,13 @@ public class PlayerInventory : MonoBehaviour
 
     private PlayerManager playerManager { get; set; }
 
+    AudioStation audioStation;
+
+    private void Start()
+    {
+        audioStation = AudioStation.Instance;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && cookingPot != null)
@@ -76,6 +83,11 @@ public class PlayerInventory : MonoBehaviour
         {
             playerManager.GetHealth(1);
             taskManager.UpdateTaskList();
+            audioStation.StartNewRandomSFXPlayer(audioStation.ingredientSFX.asset[2].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
+        }
+        else
+        {
+            audioStation.StartNewRandomSFXPlayer(audioStation.ingredientSFX.asset[1].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
         }
     }
 

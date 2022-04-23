@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         audioStation = AudioStation.Instance;
-        audioStation.StartNewRandomSFXPlayer(audioStation.firebulletSFX.asset[0].audioClips, pitchMin: 0.9f, pitchMax: 1.1f, parent: transform);
+        audioStation.StartNewRandomSFXPlayer(audioStation.firebulletSFX.asset[0].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
     }
 
     private void Update()
