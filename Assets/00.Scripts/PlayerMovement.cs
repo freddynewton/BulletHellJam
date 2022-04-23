@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,8 +19,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float movementSpeed;
 
     private Vector2 InputVector { get; set; }
-
-    private bool IsMoving { get; set; }
     #endregion
 
     #region Dash Variables
@@ -54,34 +53,31 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyMovementVector()
     {
-        Vector2 currentPos = rigidbody2D.position;
         Vector2 adjustedMovement = InputVector * movementSpeed;
-        rigidbody2D.MovePosition(currentPos + adjustedMovement * Time.deltaTime);
+        rigidbody2D.MovePosition((Vector2)transform.position + adjustedMovement * Time.deltaTime);
     }
 
     private void GetDirectionVector()
     {
         InputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        IsMoving = (InputVector != Vector2.zero) ? true : false;
     }
 
     private void Dash()
     {
         // Show the destination of dash
-        Debug.DrawRay(transform.position, InputVector * dashTime * dashSpeed, Color.red);
+        // Debug.DrawRay(transform.position, InputVector * dashTime * dashSpeed, Color.red);
 
         if (CurrentDashTime <= 0 && !isDashing)
         {
-            playerManager.isInvincible = false;
+            playerManager.isInvincibleBullet = false;
             isDashing = false;
         }
 
         if (CurrentDashTime <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
-            playerManager.isInvincible = true;
-
+            StartCoroutine(playerManager.SetFalldownInvincible(dashTime));
+            StartCoroutine(playerManager.SetBulletInvincible(dashTime));
             CurrentDashTime = dashTime;
-            IsMoving = false;
 
             // Player is dashing
             var tempInputVec = InputVector;

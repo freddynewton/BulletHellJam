@@ -1,4 +1,7 @@
+using Cysharp.Threading.Tasks;
 using System;
+using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -6,8 +9,13 @@ public class PlayerManager : MonoBehaviour
     public event Action OnPlayerDeath;
     public event Action OnPlayerHealthChange;
     [SerializeField] private int maxHealth;
+    [SerializeField] private int damageInvincibleTime = 2;
+    public PlayerMovement playerMovement;
 
-    public bool isInvincible { get; set; }
+    public int DamageInvincibleTime => damageInvincibleTime;
+
+    public bool isInvincibleBullet { get; set; }
+    public bool isInvicibleFallDamage { get; set; }
 
     public int MaxHealth => maxHealth;
     public int currentHealth { get; private set; }
@@ -19,7 +27,7 @@ public class PlayerManager : MonoBehaviour
 
     public void GetDamage(int damage)
     {
-        if (!isInvincible)
+        if (!isInvincibleBullet && !isInvicibleFallDamage)
         {
             currentHealth -= damage;
             OnPlayerHealthChange?.Invoke();
@@ -38,6 +46,24 @@ public class PlayerManager : MonoBehaviour
         currentHealth += amount;
         OnPlayerHealthChange?.Invoke();
         Debug.Log(currentHealth);
+    }
+
+    public IEnumerator SetFalldownInvincible(float time)
+    {
+        isInvicibleFallDamage = true;
+
+        yield return new WaitForSecondsRealtime(time);
+
+        isInvicibleFallDamage = false;
+    }
+
+    public IEnumerator SetBulletInvincible(float time)
+    {
+        isInvincibleBullet = true;
+
+        yield return new WaitForSecondsRealtime(time);
+
+        isInvincibleBullet = false;
     }
 
     private void Dead()

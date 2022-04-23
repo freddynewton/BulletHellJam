@@ -157,7 +157,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &1027808910
 CapsuleCollider2D:
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 1689919267}
   playerManager: {fileID: 9087255570215709569}
-  movementSpeed: 5
+  movementSpeed: 6
   dashTime: 0.2
   dashSpeed: 20
 --- !u!114 &9087255570215709569

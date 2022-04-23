@@ -11,13 +11,15 @@ public class FallDownController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            Debug.Log("Player enter");
+
             if (playerManager == null || playerMovement == null)
             {
                 playerMovement = collision.GetComponent<PlayerMovement>();
                 playerManager = collision.GetComponent<PlayerManager>();
             }
 
-            if (!playerManager.isInvincible)
+            if (!playerManager.isInvincibleBullet)
             {
                 playerManager.GetDamage(1);
                 playerMovement.transform.position = playerMovement.dashStartPoint;

@@ -17,7 +17,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && cookingPot != null)
         {
             if (Vector2.Distance(cookingPot.transform.position, transform.position) < cookingPot.InteractRange)
             {
