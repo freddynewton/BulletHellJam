@@ -17,7 +17,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && cookingPot != null)
         {
             if (Vector2.Distance(cookingPot.transform.position, transform.position) < cookingPot.InteractRange)
             {
@@ -84,6 +84,10 @@ public class PlayerInventory : MonoBehaviour
         playerManager = GetComponent<PlayerManager>();
         cookingPot = FindObjectOfType<CookingPot>();
         taskManager = FindObjectOfType<TaskManager>();
-        cookingPot.OnCookingPotUse += ClearCurrentItem;
+
+        if (cookingPot != null)
+        {
+            cookingPot.OnCookingPotUse += ClearCurrentItem;
+        }
     }
 }
