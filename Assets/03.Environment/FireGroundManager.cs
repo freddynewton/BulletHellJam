@@ -1,15 +1,33 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class FireGroundManager : MonoBehaviour
 {
-    public static event Action onPlayerStepOnFire;
+    // Store the postions of every fire grounds
+    private GameObject[] fireAreas;
+    [SerializeField] private float ignitionInterval;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Start()
     {
-        if (other.tag == "Player")
+        fireAreas = new GameObject[6];
+        for (int i = 0; i < fireAreas.Length; i++)
         {
-            onPlayerStepOnFire?.Invoke();
+            fireAreas[i] = transform.GetChild(i).gameObject;
+        }
+
+        StartCoroutine(IgniteGround());
+    }
+
+    private IEnumerator IgniteGround()
+    {
+        while (true)
+        {
+            // Ignite two areas
+            int areaToIgnite = UnityEngine.Random.Range(0, 6);
+            Debug.Log(areaToIgnite);
+
+            yield return new WaitForSeconds(ignitionInterval);
         }
     }
 }

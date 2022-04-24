@@ -35,16 +35,11 @@ public class PlayerManager : MonoBehaviour
         audioStation = AudioStation.Instance;
     }
 
-    private void OnEnable()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        FireGroundManager.onPlayerStepOnFire += Dead;
+        if (other.tag == "FireArea")
+            Dead();
     }
-
-    private void OnDisable()
-    {
-        FireGroundManager.onPlayerStepOnFire -= Dead;
-    }
-
 
     public void GetDamage(int damage)
     {
