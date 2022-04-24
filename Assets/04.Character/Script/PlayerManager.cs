@@ -12,6 +12,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private int damageInvincibleTime = 2;
     public PlayerMovement playerMovement;
 
+    Animator animator;
+
     public int DamageInvincibleTime => damageInvincibleTime;
 
     public bool isInvincibleBullet { get; set; }
@@ -23,6 +25,7 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
+        animator = GetComponent<Animator>();
     }
 
     AudioStation audioStation;
@@ -47,7 +50,10 @@ public class PlayerManager : MonoBehaviour
                 return;
             }
             else
+            {
+                animator.SetBool("isHit", true);
                 audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[2].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
+            }
         }
     }
 
@@ -80,11 +86,17 @@ public class PlayerManager : MonoBehaviour
     {
         OnPlayerDeath?.Invoke();
         transform.GetChild(0).gameObject.SetActive(false);
+        animator.SetBool("isDead", true);
         audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[3].audioClips);
     }
 
     public void PlayFootstepSFX()
     {
         audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[0].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
+    }
+
+    public void StopHitAnim()
+    {
+        animator.SetBool("isHit", false);
     }
 }

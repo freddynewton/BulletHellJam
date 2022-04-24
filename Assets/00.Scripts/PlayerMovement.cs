@@ -35,6 +35,14 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     AudioStation audioStation;
+    Animator animator;
+    SpriteRenderer spriteRenderer;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     private void Start()
     {
@@ -56,12 +64,16 @@ public class PlayerMovement : MonoBehaviour
         {
             ApplyMovementVector();
         }
+
+        if (InputVector != Vector2.zero)
+            spriteRenderer.flipX = InputVector.x > 0;
     }
 
     private void ApplyMovementVector()
     {
         Vector2 adjustedMovement = InputVector * movementSpeed;
         rigidbody2D.MovePosition((Vector2)transform.position + adjustedMovement * Time.deltaTime);
+        animator.SetBool("isWalking", InputVector != Vector2.zero);
     }
 
     private void GetDirectionVector()
@@ -96,6 +108,9 @@ public class PlayerMovement : MonoBehaviour
             isDashing = true;
             CurrentDashTime -= Time.deltaTime;
         }
+
+        // Doesnt work
+        //animator.SetBool("isDashing", isDashing);
     }
 
     /*
