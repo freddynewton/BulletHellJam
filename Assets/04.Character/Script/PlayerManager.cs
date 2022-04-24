@@ -35,6 +35,11 @@ public class PlayerManager : MonoBehaviour
         audioStation = AudioStation.Instance;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "FireArea")
+            Dead();
+    }
 
     public void GetDamage(int damage)
     {
