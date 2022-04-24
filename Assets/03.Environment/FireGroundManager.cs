@@ -21,11 +21,29 @@ public class FireGroundManager : MonoBehaviour
 
     private IEnumerator IgniteGround()
     {
+        int[] areasToIgnite = new int[2];
+
         while (true)
         {
+            // Get two areas to ignite
+            int holder1 = UnityEngine.Random.Range(0, 6);
+            int holder2 = UnityEngine.Random.Range(0, 6);
+            while (Array.IndexOf(areasToIgnite, holder1) > -1)
+            {
+                holder1 = UnityEngine.Random.Range(0, 6);
+            }
+            while (Array.IndexOf(areasToIgnite, holder2) > -1 || holder1 == holder2)
+            {
+                holder2 = UnityEngine.Random.Range(0, 6);
+            }
+            areasToIgnite[0] = holder1;
+            areasToIgnite[1] = holder2;
+
             // Ignite two areas
-            int areaToIgnite = UnityEngine.Random.Range(0, 6);
-            Debug.Log(areaToIgnite);
+            foreach (int index in areasToIgnite)
+            {
+                fireAreas[index].SetActive(true);
+            }
 
             yield return new WaitForSeconds(ignitionInterval);
         }
