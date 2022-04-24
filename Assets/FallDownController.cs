@@ -7,7 +7,7 @@ public class FallDownController : MonoBehaviour
     private PlayerManager playerManager;
     private PlayerMovement playerMovement;
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
@@ -19,9 +19,13 @@ public class FallDownController : MonoBehaviour
                 playerManager = collision.GetComponent<PlayerManager>();
             }
 
-            if (!playerManager.isInvincibleBullet)
+            if (!playerManager.isInvicibleFallDamage)
             {
-                playerManager.GetDamage(1);
+                if (!playerManager.isInvincibleBullet)
+                {
+                    playerManager.GetDamage(1);
+                }
+
                 playerMovement.transform.position = playerMovement.dashStartPoint;
             }
         }

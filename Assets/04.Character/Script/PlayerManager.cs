@@ -92,7 +92,14 @@ public class PlayerManager : MonoBehaviour
         OnPlayerDeath?.Invoke();
         transform.GetChild(0).gameObject.SetActive(false);
         animator.SetBool("isDead", true);
+        var gameOver = FindObjectOfType<GameOverSceneController>();
+
+        if (gameOver != null)
+        {
+            StartCoroutine(gameOver.ShowGameOverScreen(2));
+        }
         audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[3].audioClips);
+
     }
 
     public void PlayFootstepSFX()

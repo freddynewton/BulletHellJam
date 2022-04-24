@@ -9,7 +9,7 @@ public class ItemSpawner : MonoBehaviour
 
     private GameObject currentSpawnedItem;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (currentSpawnedItem == null)
         {

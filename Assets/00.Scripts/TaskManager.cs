@@ -22,6 +22,8 @@ public class TaskManager : MonoBehaviour
 
     public List<Item> TaskList => taskList;
 
+    public int recipesCompleted { get; private set; }
+
     private int phaseCount = 1;
     private int currentPhaseAmount = 0;
 
@@ -47,8 +49,9 @@ public class TaskManager : MonoBehaviour
         if (currentPhaseAmount == phaseCount)
         {
             currentPhaseAmount = 0;
+            recipesCompleted++;
 
-            if (phaseCount < 10)
+            if (phaseCount < MaxPhaseAmount)
             {
                 phaseCount++;
             }

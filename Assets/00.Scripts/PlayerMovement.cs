@@ -51,7 +51,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        ApplyMovement();
+        if (playerManager.currentHealth > 0)
+        {
+            ApplyMovement();
+        }
     }
 
     private void ApplyMovement()
@@ -92,10 +95,11 @@ public class PlayerMovement : MonoBehaviour
             isDashing = false;
         }
 
-        if (CurrentDashTime <= 0 && Input.GetKeyDown(KeyCode.Space))
+        if (CurrentDashTime <= 0 && Input.GetKeyDown(KeyCode.Space) && playerManager.currentHealth > 0)
         {
             StartCoroutine(playerManager.SetFalldownInvincible(dashTime));
             StartCoroutine(playerManager.SetBulletInvincible(dashTime));
+            dashStartPoint = transform.position;
             CurrentDashTime = dashTime;
 
             // Player is dashing
