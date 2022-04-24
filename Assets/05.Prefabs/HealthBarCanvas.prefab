@@ -177,7 +177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a57dde1f97b4e147be539de6814fa78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FullHeart: {fileID: 21300000, guid: ae264b6cab482b74f99ad7fd54cea400, type: 3}
-  EmptyHeart: {fileID: 21300000, guid: c27799d61a1722d4f9ba728857a52560, type: 3}
+  FullHeart: {fileID: 21300000, guid: d8f57827a4d133e4f8a0913b2f38e7a5, type: 3}
+  EmptyHeart: {fileID: 21300000, guid: 7f5743816e1d5724baa592c3ceb54c7b, type: 3}
   HeartContainerPrefab: {fileID: 1672516089837580814, guid: e7580fe85ec49c144a3c9f8ac74b84cd, type: 3}
-  MaxHeartAmount: 5
