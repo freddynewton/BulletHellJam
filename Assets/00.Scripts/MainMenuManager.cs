@@ -32,6 +32,7 @@ namespace HellsKitchen.Ui
         void Start()
         {
             audioStation = AudioStation.Instance;
+            audioStation.StartNewMusicPlayer(audioStation.music.asset[1].audioClips[0], true);
         }
     }
 }
