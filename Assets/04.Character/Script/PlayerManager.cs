@@ -35,6 +35,16 @@ public class PlayerManager : MonoBehaviour
         audioStation = AudioStation.Instance;
     }
 
+    private void OnEnable()
+    {
+        FireGroundManager.onPlayerStepOnFire += Dead;
+    }
+
+    private void OnDisable()
+    {
+        FireGroundManager.onPlayerStepOnFire -= Dead;
+    }
+
 
     public void GetDamage(int damage)
     {
