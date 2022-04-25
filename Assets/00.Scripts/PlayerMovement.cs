@@ -65,7 +65,6 @@ public class PlayerMovement : MonoBehaviour
     {
         GetDirectionVector();
 
-
         Dash();
 
         if (CurrentDashTime <= 0)
@@ -73,8 +72,13 @@ public class PlayerMovement : MonoBehaviour
             ApplyMovementVector();
         }
 
-        if (InputVector != Vector2.zero)
-            spriteRenderer.flipX = InputVector.x > 0;
+        if (Input.GetAxisRaw("Horizontal") > 0)
+        {
+            spriteRenderer.flipX = true;
+        } else if (Input.GetAxisRaw("Horizontal") < 0)
+        {
+            spriteRenderer.flipX = false;
+        }
     }
 
     private void ApplyMovementVector()
@@ -91,10 +95,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Dash()
     {
-        // Show the destination of dash
-        // Debug.DrawRay(transform.position, InputVector * dashTime * dashSpeed, Color.red);
-
-        if (CurrentDashTime <= 0 && !isDashing)
+        if (CurrentDashTime <= 0)
         {
             playerManager.isInvincibleBullet = false;
             isDashing = false;
@@ -110,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
             // Player is dashing
             var tempInputVec = InputVector;
-            rigidbody2D.velocity = tempInputVec * dashSpeed;
+            rigidbody2D.velocity = tempInputVec * dashSpeed * Time.deltaTime;
             AudioStation.Instance.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[1].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
         }
         else if (CurrentDashTime > 0)
@@ -127,26 +128,4 @@ public class PlayerMovement : MonoBehaviour
         // Doesnt work
         //animator.SetBool("isDashing", isDashing);
     }
-
-    /*
-    private void EnableCollider()
-    {
-        // Check if the destination of dash is in wall (With overlapCapsule)
-        Vector2 destination = (Vector2)transform.position + InputVector * dashSpeed * dashTime;
-        Vector2 size = GetComponent<CapsuleCollider2D>().size;
-        CapsuleDirection2D direction = GetComponent<CapsuleCollider2D>().direction;
-
-        Collider2D[] walls = Physics2D.OverlapCapsuleAll(destination, size, direction, 0f, wallMask);
-
-        Debug.Log(walls);
-
-        // If true then push player onto the platform
-        if (walls.Length > 0)
-        {
-            // Push player onto the platform
-        }
-
-        // Enable Player and BulletDetector collider
-    }
-    */
 }
