@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4816885712000649010}
   - component: {fileID: 3772355935426440224}
   m_Layer: 0
-  m_Name: CircleBulletSpawner
+  m_Name: CircleBulletSpawner 1
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -84,10 +84,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletAmount: 100
-  Waves: 6
-  WaveTimer: 0.6
+  Waves: 12
+  WaveTimer: 0.3
   BulletSpawnTimeOffset: 0
-  RotationSpeed: 80
+  RotationSpeed: 45
   SeccondWave: 20
   SeccondWaveTimer: 5
   SpawnPositions:

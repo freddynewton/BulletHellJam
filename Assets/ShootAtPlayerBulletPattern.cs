@@ -12,7 +12,7 @@ public class ShootAtPlayerBulletPattern : BulletPatternSpawner
             {
                 Bullet bullet = bulletSpawner.BasicBulletPool.Get();
                 bullet.transform.position = transform.position;
-                bullet.DirectionVector = transform.position - bulletSpawner.playerManager.transform.position;
+                bullet.DirectionVector = (bulletSpawner.playerManager.transform.position - transform.position).normalized;
                 yield return new WaitForSecondsRealtime(BulletSpawnTimeOffset);
 
             }
