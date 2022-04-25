@@ -44,7 +44,11 @@ public class BulletSpawner : MonoBehaviour
     private void Awake()
     {
         playerManager = FindObjectOfType<PlayerManager>();
-        SpawnRandomBulletPattern();
+
+        for (int i = 0; i < 3; i++)
+        {
+            SpawnRandomBulletPattern();
+        }
     }
 
     public void SpawnRandomBulletPattern()
