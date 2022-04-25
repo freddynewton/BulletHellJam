@@ -79,7 +79,7 @@ public class Interactable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
    {
-        if (item == null || !collision.CompareTag(playerInventory.tag))
+        if (item == null || !collision.CompareTag(playerInventory.tag) || playerInventory.currentItem == item)
         {
             return;
         }

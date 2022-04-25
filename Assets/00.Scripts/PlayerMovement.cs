@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        dashStartPoint = transform.position;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -50,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     {
         audioStation = AudioStation.Instance;
     }
+
 
     private void Update()
     {

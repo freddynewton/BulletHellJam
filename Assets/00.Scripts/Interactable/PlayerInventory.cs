@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    private Item currentItem { get; set; }
+    public Item currentItem { get; private set; }
 
     public List<Interactable> interactables { get; set; } = new List<Interactable>();
 
