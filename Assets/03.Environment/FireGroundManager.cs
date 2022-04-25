@@ -25,6 +25,12 @@ public class FireGroundManager : MonoBehaviour
 
         while (true)
         {
+            // Put out area in fire
+            foreach (GameObject fireArea in fireAreas)
+            {
+                fireArea.SetActive(false);
+            }
+
             // Get two areas to ignite
             int holder1 = UnityEngine.Random.Range(0, 6);
             int holder2 = UnityEngine.Random.Range(0, 6);
