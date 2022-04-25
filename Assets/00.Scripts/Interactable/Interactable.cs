@@ -34,12 +34,19 @@ public class Interactable : MonoBehaviour
 
     public virtual void Use()
     {
-
         SquishSquashAnimation(false);
+    }
+
+    public virtual void HoverAnimation()
+    {
+        //LeanTween.moveY(gameObject, 0.5f, 1f).setLoopPingPong().setEaseInBack();
     }
 
     private void Awake()
     {
+
+        HoverAnimation();
+
         // DEMO CODE
         if (collider2D == null)
         {

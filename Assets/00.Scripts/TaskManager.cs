@@ -22,12 +22,19 @@ public class TaskManager : MonoBehaviour
 
     public List<Item> TaskList => taskList;
 
+    private BulletSpawner bulletSpawner;
+
     public int recipesCompleted { get; private set; }
 
     private int phaseCount = 1;
     private int currentPhaseAmount = 0;
 
     public event Action OnTaskListUpdated;
+
+    private void Awake()
+    {
+        bulletSpawner = FindObjectOfType<BulletSpawner>();
+    }
 
     private void Start()
     {
@@ -50,6 +57,7 @@ public class TaskManager : MonoBehaviour
         {
             currentPhaseAmount = 0;
             recipesCompleted++;
+            bulletSpawner.SpawnRandomBulletPattern();
 
             if (phaseCount < MaxPhaseAmount)
             {

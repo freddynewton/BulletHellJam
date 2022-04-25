@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5285615459704716833}
   - component: {fileID: 5285615459704716832}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5285615461432827676}
   - component: {fileID: 5285615461432827677}
   - component: {fileID: -6433774844797541126}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Carrot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

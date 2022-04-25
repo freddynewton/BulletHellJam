@@ -7,6 +7,11 @@ public class CookingPot : Interactable
 {
     public event Action OnCookingPotUse;
 
+    public override void HoverAnimation()
+    {
+        // Do nothing.
+    }
+
     public override void Use()
     {
         base.Use();
