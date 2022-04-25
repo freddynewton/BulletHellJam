@@ -26,7 +26,7 @@ public class CircleBulletSpawner : BulletPatternSpawner
                 {
                     Bullet bullet = bulletSpawner.BasicBulletPool.Get();
                     bullet.transform.position = SpawnPositions[x].position;
-                    bullet.DirectionVector = SpawnPositions[x].localPosition;
+                    bullet.DirectionVector = (SpawnPositions[x].position - transform.position).normalized;
                 }
 
                 currentWave++;

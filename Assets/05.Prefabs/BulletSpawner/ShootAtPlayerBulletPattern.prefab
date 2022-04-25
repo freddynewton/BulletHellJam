@@ -47,4 +47,4 @@ MonoBehaviour:
   BulletAmount: 30
   Waves: 5
   WaveTimer: 5
-  BulletSpawnTimeOffset: 0.2
+  BulletSpawnTimeOffset: 0.4
