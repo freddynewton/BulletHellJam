@@ -192,6 +192,7 @@ MonoBehaviour:
   playerManager: {fileID: 9087255570215709569}
   movementSpeed: 6
   dashTime: 0.2
+  dashTimeCooldown: 2
   dashSpeed: 20
 --- !u!114 &9087255570215709569
 MonoBehaviour:

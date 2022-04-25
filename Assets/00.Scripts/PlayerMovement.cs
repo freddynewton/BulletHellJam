@@ -24,7 +24,9 @@ public class PlayerMovement : MonoBehaviour
     #region Dash Variables
     [Header("Dash")]
     [SerializeField] private float dashTime;
+    [SerializeField] private float dashTimeCooldown = 3f;
 
+    private float currentDashTimeCooldown;
     private float CurrentDashTime { get; set; }
 
     public Vector2 dashStartPoint { get; private set; } = Vector2.zero;
@@ -61,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
     {
         GetDirectionVector();
 
+
         Dash();
 
         if (CurrentDashTime <= 0)
@@ -95,12 +98,13 @@ public class PlayerMovement : MonoBehaviour
             isDashing = false;
         }
 
-        if (CurrentDashTime <= 0 && Input.GetKeyDown(KeyCode.Space) && playerManager.currentHealth > 0)
+        if (CurrentDashTime <= 0 && Input.GetKeyDown(KeyCode.Space) && playerManager.currentHealth > 0 && currentDashTimeCooldown <= 0)
         {
             StartCoroutine(playerManager.SetFalldownInvincible(dashTime));
             StartCoroutine(playerManager.SetBulletInvincible(dashTime));
             dashStartPoint = transform.position;
             CurrentDashTime = dashTime;
+            currentDashTimeCooldown = dashTimeCooldown;
 
             // Player is dashing
             var tempInputVec = InputVector;
@@ -111,6 +115,11 @@ public class PlayerMovement : MonoBehaviour
         {
             isDashing = true;
             CurrentDashTime -= Time.deltaTime;
+        }
+
+        if (currentDashTimeCooldown > 0)
+        {
+            currentDashTimeCooldown -= Time.deltaTime;
         }
 
         // Doesnt work
