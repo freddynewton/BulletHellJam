@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1981738361}
   m_Layer: 5
   m_Name: CurrentItem
-  m_TagString: Untagged
+  m_TagString: CurrentItemUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 6982980625200909436}
   m_Layer: 5
   m_Name: GridOverlay
-  m_TagString: Untagged
+  m_TagString: ReceipeGridUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -255,3 +255,4 @@ MonoBehaviour:
   Grid: {fileID: 6982980625200909438}
   ItemPrefab: {fileID: 6810428331611535361, guid: 9419c36d4f709404383dcb0566790455, type: 3}
   CurrentItem: {fileID: 1981738361}
+  MaxPhaseAmount: 10

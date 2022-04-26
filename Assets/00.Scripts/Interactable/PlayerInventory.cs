@@ -28,6 +28,11 @@ public class PlayerInventory : MonoBehaviour
         {
             if (Vector2.Distance(cookingPot.transform.position, transform.position) < cookingPot.InteractRange)
             {
+                if (taskManager == null)
+                {
+                    taskManager = FindObjectOfType<TaskManager>();
+                }
+
                 taskManager.CurrentItem.enabled = false;
                 cookingPot.Use();
             }
