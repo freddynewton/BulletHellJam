@@ -197,14 +197,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1981738359, guid: 1b8bc89f557aacf4493f7fc0981d7df5, type: 3}
-      propertyPath: m_TagString
-      value: CurrentItemUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 6982980625200909438, guid: 1b8bc89f557aacf4493f7fc0981d7df5, type: 3}
-      propertyPath: m_TagString
-      value: ReceipeGridUI
-      objectReference: {fileID: 0}
     - target: {fileID: 6982980626089081225, guid: 1b8bc89f557aacf4493f7fc0981d7df5, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -399,10 +391,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7898434775570443788, guid: 3c9b8027f898c65448239096b85687c6, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7898434775570443789, guid: 3c9b8027f898c65448239096b85687c6, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -490,10 +478,6 @@ PrefabInstance:
     - target: {fileID: 7898434775570443793, guid: 3c9b8027f898c65448239096b85687c6, type: 3}
       propertyPath: m_Name
       value: GameOverCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7898434775570443793, guid: 3c9b8027f898c65448239096b85687c6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c9b8027f898c65448239096b85687c6, type: 3}
