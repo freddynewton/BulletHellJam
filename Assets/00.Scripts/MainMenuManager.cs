@@ -13,7 +13,7 @@ namespace HellsKitchen.Ui
 
         public Button ExitButton;
 
-        AudioStation audioStation;
+        SoundStation audioStation;
 
         private void Awake()
         {
@@ -23,7 +23,8 @@ namespace HellsKitchen.Ui
             StartButton.onClick.AddListener(() =>
             {
                 SceneManagementController.Instance.LoadScenes(StartButtonContainer.Title);
-                audioStation.StartNewMusicPlayer(audioStation.music.asset[0].audioClips[0], true);
+                audioStation.Stop(SoundStation.Asset.Music, "MainMenu");
+                audioStation.Play(SoundStation.Asset.Music, "Game");
             });
 
             ExitButton.onClick.AddListener(() =>
@@ -34,8 +35,9 @@ namespace HellsKitchen.Ui
 
         void Start()
         {
-            audioStation = AudioStation.Instance;
-            audioStation.StartNewMusicPlayer(audioStation.music.asset[1].audioClips[0], true);
+            audioStation = SoundStation.Instance;
+            audioStation.Play(SoundStation.Asset.Music, "MainMenu");
+
         }
     }
 }

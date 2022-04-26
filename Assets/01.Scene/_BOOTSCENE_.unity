@@ -210,12 +210,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1064665659}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0274cf82ab3683458d4a85b8d20b64c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bba197a061efb440a6b4622ea0ecaf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   music: {fileID: 11400000, guid: b33193cf5563ebb409ad1373aa9e184c, type: 2}
   chefSFX: {fileID: 11400000, guid: 48d6e81620fd01640923460c2e33a13a, type: 2}
   firebulletSFX: {fileID: 11400000, guid: 84bbc6d961bd736419776309f0a2e321, type: 2}
   ingredientSFX: {fileID: 11400000, guid: 68c7927c82dddb542afe1095f524e10b, type: 2}
-  audioPlayerPrefab: {fileID: 4190236914402708207, guid: 0cc822c0702a2b643a41d8e6c62937f2, type: 3}
-  audioPlayers: []

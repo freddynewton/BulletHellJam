@@ -9,21 +9,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40882a865d1affb4eb91c59edb0718e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a06d131522d5d14aa9d0525a269b58b, type: 3}
   m_Name: Chef
   m_EditorClassIdentifier: 
   asset:
   - name: Footstep
-    audioClips:
+    clips:
     - {fileID: 8300000, guid: ca9e9a98b6b66354897c0bb7d42fca62, type: 3}
     - {fileID: 8300000, guid: dd973bd2e5b1cda4a8dc28b216782d50, type: 3}
     - {fileID: 8300000, guid: 8e9b2cb7f1e160249b5c69530a9a354e, type: 3}
+    volume: 1
+    pitchMin: 0.9
+    pitchMax: 1.1
+    loop: 0
+    source: {fileID: 0}
   - name: Dash
-    audioClips:
+    clips:
     - {fileID: 8300000, guid: 03f2af24c1aa4b94bb9e06085a7ef522, type: 3}
+    volume: 1
+    pitchMin: 0.9
+    pitchMax: 1.1
+    loop: 0
+    source: {fileID: 0}
   - name: Hurt
-    audioClips:
+    clips:
     - {fileID: 8300000, guid: 5baa78fb4c6d04545a4a87c51e0269c9, type: 3}
+    volume: 1
+    pitchMin: 0.9
+    pitchMax: 1.1
+    loop: 0
+    source: {fileID: 0}
   - name: Dead
-    audioClips:
+    clips:
     - {fileID: 8300000, guid: b68cf61047ca9e945b74cc18577e543d, type: 3}
+    volume: 1
+    pitchMin: 0
+    pitchMax: 0
+    loop: 0
+    source: {fileID: 0}

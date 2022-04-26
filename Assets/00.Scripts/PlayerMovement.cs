@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing = false;
     #endregion
 
-    AudioStation audioStation;
+    SoundStation audioStation;
     Animator animator;
     SpriteRenderer spriteRenderer;
 
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        audioStation = AudioStation.Instance;
+        audioStation = SoundStation.Instance;
     }
 
 
@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
             // Player is dashing
             var tempInputVec = InputVector;
             rigidbody2D.velocity = tempInputVec * dashSpeed * Time.deltaTime;
-            AudioStation.Instance.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[1].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
+            audioStation.Play(SoundStation.Asset.ChefSFX, "Dash");
         }
         else if (CurrentDashTime > 0)
         {

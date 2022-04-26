@@ -15,11 +15,11 @@ public class PlayerInventory : MonoBehaviour
 
     private PlayerManager playerManager { get; set; }
 
-    AudioStation audioStation;
+    SoundStation audioStation;
 
     private void Start()
     {
-        audioStation = AudioStation.Instance;
+        audioStation = SoundStation.Instance;
     }
 
     private void Update()
@@ -83,11 +83,11 @@ public class PlayerInventory : MonoBehaviour
         {
             playerManager.GetHealth(1);
             taskManager.UpdateTaskList();
-            audioStation.StartNewRandomSFXPlayer(audioStation.ingredientSFX.asset[2].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
+            audioStation.Play(SoundStation.Asset.IngredientSFX, "DishComplete");
         }
         else
         {
-            audioStation.StartNewRandomSFXPlayer(audioStation.ingredientSFX.asset[1].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
+            audioStation.Play(SoundStation.Asset.IngredientSFX, "IntoPot");
         }
     }
 

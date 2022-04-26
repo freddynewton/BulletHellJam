@@ -28,11 +28,11 @@ public class PlayerManager : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    AudioStation audioStation;
+    SoundStation audioStation;
 
     private void Start()
     {
-        audioStation = AudioStation.Instance;
+        audioStation = SoundStation.Instance;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -57,7 +57,7 @@ public class PlayerManager : MonoBehaviour
             else
             {
                 animator.SetBool("isHit", true);
-                audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[2].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
+                audioStation.Play(SoundStation.Asset.ChefSFX, "Hurt");
             }
         }
     }
@@ -98,13 +98,12 @@ public class PlayerManager : MonoBehaviour
         {
             StartCoroutine(gameOver.ShowGameOverScreen(2));
         }
-        audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[3].audioClips);
-
+        audioStation.Play(SoundStation.Asset.ChefSFX, "Dead");
     }
 
     public void PlayFootstepSFX()
     {
-        audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[0].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
+        audioStation.Play(SoundStation.Asset.ChefSFX, "Footstep");
     }
 
     public void StopHitAnim()

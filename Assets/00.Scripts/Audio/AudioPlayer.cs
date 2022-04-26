@@ -7,7 +7,7 @@ public class AudioPlayer : MonoBehaviour
     public AudioSource AudioSource { get; private set; }
     [SerializeField] AudioMixerGroup musicGroup, SFXGroup;
 
-    AudioStation audioStation;
+    SoundStation audioStation;
 
     bool started;
 
@@ -18,7 +18,7 @@ public class AudioPlayer : MonoBehaviour
 
     void Start()
     {
-        audioStation = AudioStation.Instance;
+        audioStation = SoundStation.Instance;
     }
 
     public void SetupSFX(AudioClip[] clips, float audioPitchMin, float audioPitchMax, bool is2D)
@@ -64,6 +64,6 @@ public class AudioPlayer : MonoBehaviour
     IEnumerator RecycleAfterAudioEnd()
     {
         yield return new WaitForSeconds(AudioSource.clip.length + .5f);
-        audioStation.audioPlayers.Remove(this);
+        //audioStation.audioPlayers.Remove(this);
     }
 }

@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     private float currentBulletLifeTime;
     private bool isMoving;
 
-    AudioStation audioStation;
+    SoundStation audioStation;
 
     public void OnGetBullet()
     {
@@ -41,8 +41,8 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        audioStation = AudioStation.Instance;
-        audioStation.StartNewRandomSFXPlayer(audioStation.firebulletSFX.asset[0].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
+        audioStation = SoundStation.Instance;
+        //audioStation.StartNewRandomSFXPlayer(audioStation.firebulletSFX.asset[0].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
     }
 
     private void Update()
