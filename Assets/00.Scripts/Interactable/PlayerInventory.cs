@@ -73,7 +73,6 @@ public class PlayerInventory : MonoBehaviour
     {
         if (currentItem == taskManager.TaskList[0])
         {
-            Debug.Log($"{currentItem.Name} used at the cooking pot.");
             currentItem = null;
             Destroy(taskManager.Grid.transform.GetChild(0).gameObject);
             taskManager.TaskList.RemoveAt(0);

@@ -37,8 +37,8 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "FireArea" && !isInvincibleBullet)
-            Dead();
+        if (other.tag == "FireArea" && !isInvincibleBullet && !isInvicibleFallDamage)
+            GetDamage(1);
     }
 
     public void GetDamage(int damage)
@@ -47,7 +47,6 @@ public class PlayerManager : MonoBehaviour
         {
             currentHealth -= damage;
             OnPlayerHealthChange?.Invoke();
-            Debug.Log(currentHealth);
 
             if (currentHealth <= 0)
             {
@@ -66,7 +65,6 @@ public class PlayerManager : MonoBehaviour
     {
         currentHealth += amount;
         OnPlayerHealthChange?.Invoke();
-        Debug.Log(currentHealth);
     }
 
     public IEnumerator SetFalldownInvincible(float time)
@@ -96,7 +94,7 @@ public class PlayerManager : MonoBehaviour
 
         if (gameOver != null)
         {
-            StartCoroutine(gameOver.ShowGameOverScreen(2));
+            StartCoroutine(gameOver.ShowGameOverScreen(5));
         }
         audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[3].audioClips);
 

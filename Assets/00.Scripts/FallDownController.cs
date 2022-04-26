@@ -11,8 +11,6 @@ public class FallDownController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Player enter");
-
             if (playerManager == null || playerMovement == null)
             {
                 playerMovement = collision.GetComponent<PlayerMovement>();

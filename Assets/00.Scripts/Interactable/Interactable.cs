@@ -21,11 +21,6 @@ public class Interactable : MonoBehaviour
 
     public virtual Item Interact()
     {
-        if (item == null)
-        {
-            Debug.LogError($"{item} is null");
-        }
-
         audioStation.StartNewRandomSFXPlayer(audioStation.ingredientSFX.asset[0].audioClips, pitchMin: 0.9f, pitchMax: 1.1f);
         SquishSquashAnimation(true);
 

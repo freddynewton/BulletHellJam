@@ -41,10 +41,9 @@ public class GameOverSceneController : MonoBehaviour
     public IEnumerator ShowGameOverScreen(float delay)
     {
         HighscoreText.text = $"Recipes completed: {FindObjectOfType<TaskManager>().recipesCompleted}";
-        GetComponent<Canvas>().enabled = true;
 
         yield return new WaitForSecondsRealtime(delay);
-
+        GetComponent<Canvas>().enabled = true;
         Time.timeScale = 0;
     }
 }

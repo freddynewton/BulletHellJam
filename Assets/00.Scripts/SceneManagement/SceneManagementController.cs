@@ -33,7 +33,6 @@ namespace FreddyNewton.Utility.SceneManagement
 
             if (searchedSceneContainer == null || searchedSceneContainer.SceneIdxs.Length == 0)
             {
-                Debug.LogWarning("SceneContainer " + title + " not found or empty!");
                 return;
             }
 
@@ -91,7 +90,6 @@ namespace FreddyNewton.Utility.SceneManagement
 
             if (searchedSceneContainer == null || searchedSceneContainer.SceneIdxs.Length == 0)
             {
-                Debug.LogWarning("SceneContainer " + title + " not found or empty!");
                 return;
             }
 

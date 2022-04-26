@@ -72,7 +72,6 @@ public class TaskManager : MonoBehaviour
             var image = Instantiate(ItemPrefab, Grid.transform);
             image.GetComponent<Image>().sprite = taskList[i].Icon;
 
-            Debug.Log($"Item {taskList[i]} added to the TaskList");
         }
 
         OnTaskListUpdated?.Invoke();
