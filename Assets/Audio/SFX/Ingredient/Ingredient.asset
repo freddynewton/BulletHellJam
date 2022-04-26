@@ -16,6 +16,7 @@ MonoBehaviour:
   - name: Pickup
     clips:
     - {fileID: 8300000, guid: 86568b7382b620f45ba47a0a4325b4cc, type: 3}
+    mixer: {fileID: -4318291175376192582, guid: 50d3e551dea59504486677413d101180, type: 2}
     volume: 1
     pitchMin: 0.9
     pitchMax: 1.1
@@ -24,6 +25,7 @@ MonoBehaviour:
   - name: Intopot
     clips:
     - {fileID: 8300000, guid: bbbf154b07d379445815217570c83f0e, type: 3}
+    mixer: {fileID: -4318291175376192582, guid: 50d3e551dea59504486677413d101180, type: 2}
     volume: 1
     pitchMin: 0.9
     pitchMax: 1.1
@@ -32,6 +34,7 @@ MonoBehaviour:
   - name: dishComplete
     clips:
     - {fileID: 8300000, guid: c26fd320b3f29e64cbb8021529617320, type: 3}
+    mixer: {fileID: -4318291175376192582, guid: 50d3e551dea59504486677413d101180, type: 2}
     volume: 1
     pitchMin: 0.9
     pitchMax: 1.1

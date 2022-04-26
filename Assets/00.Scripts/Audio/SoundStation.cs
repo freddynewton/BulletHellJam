@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.Audio;
 
+
 public class SoundStation : MonoBehaviour
 {
     public SoundAsset music, chefSFX, firebulletSFX, ingredientSFX;
@@ -30,6 +31,7 @@ public class SoundStation : MonoBehaviour
 
             s.source.volume = s.volume;
             s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = s.mixer;
         }
     }
 
@@ -75,6 +77,7 @@ public class Sound
     public string name;
 
     public AudioClip[] clips;
+    public AudioMixerGroup mixer;
 
     [Range(0f, 1f)] public float volume;
     [Range(0.1f, 3f)] public float pitchMin = 1, pitchMax = 1;

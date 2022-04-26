@@ -16,6 +16,7 @@ MonoBehaviour:
   - name: Game
     clips:
     - {fileID: 8300000, guid: 1e2eac09c62f55846bd54f7a6a4735fa, type: 3}
+    mixer: {fileID: 7598395430454964484, guid: 50d3e551dea59504486677413d101180, type: 2}
     volume: 1
     pitchMin: 1
     pitchMax: 1
@@ -24,6 +25,7 @@ MonoBehaviour:
   - name: MainMenu
     clips:
     - {fileID: 8300000, guid: d4dffe38ac352ac4abb9ccb08f3d1070, type: 3}
+    mixer: {fileID: 7598395430454964484, guid: 50d3e551dea59504486677413d101180, type: 2}
     volume: 1
     pitchMin: 1
     pitchMax: 1
