@@ -5071,7 +5071,7 @@ MonoBehaviour:
   rigidbody2D: {fileID: 1689919267}
   playerManager: {fileID: 9087255570215709569}
   movementSpeed: 8
-  dashTime: 0.2
+  dashTime: 0.25
   dashTimeCooldown: 2
   dashSpeed: 2000
 --- !u!114 &9087255570215709569
