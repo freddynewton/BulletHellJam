@@ -9,8 +9,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private Rigidbody2D rigidbody2D;
+    public Rigidbody2D rigidbody2D;
 
     public PlayerManager playerManager;
 

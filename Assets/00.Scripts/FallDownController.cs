@@ -19,12 +19,15 @@ public class FallDownController : MonoBehaviour
 
             if (!playerManager.isInvicibleFallDamage)
             {
-                if (!playerManager.isInvincibleBullet)
+                if (!playerManager.isInvincibleBullet && !playerManager.isInvincibleBullet)
                 {
                     playerManager.GetDamage(1);
                 }
 
-                playerMovement.transform.position = playerMovement.dashStartPoint;
+                if (playerManager.currentHealth > 0)
+                {
+                    playerMovement.transform.position = playerMovement.dashStartPoint;
+                }
             }
         }
     }

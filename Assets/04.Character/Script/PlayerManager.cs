@@ -45,6 +45,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (!isInvincibleBullet && !isInvicibleFallDamage)
         {
+            StartCoroutine(SetBulletInvincible(DamageInvincibleTime));
             currentHealth -= damage;
             OnPlayerHealthChange?.Invoke();
 
@@ -91,13 +92,12 @@ public class PlayerManager : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false);
         animator.SetBool("isDead", true);
         var gameOver = FindObjectOfType<GameOverSceneController>();
-
+        playerMovement.rigidbody2D.velocity = Vector2.zero;
         if (gameOver != null)
         {
             StartCoroutine(gameOver.ShowGameOverScreen(5));
         }
         audioStation.StartNewRandomSFXPlayer(audioStation.chefSFX.asset[3].audioClips);
-
     }
 
     public void PlayFootstepSFX()
