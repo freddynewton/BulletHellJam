@@ -22,7 +22,7 @@ MonoBehaviour:
     pitchMax: 1.1
     loop: 0
     source: {fileID: 0}
-  - name: Intopot
+  - name: IntoPot
     clips:
     - {fileID: 8300000, guid: bbbf154b07d379445815217570c83f0e, type: 3}
     mixer: {fileID: -4318291175376192582, guid: 50d3e551dea59504486677413d101180, type: 2}
@@ -31,7 +31,7 @@ MonoBehaviour:
     pitchMax: 1.1
     loop: 0
     source: {fileID: 0}
-  - name: dishComplete
+  - name: DishComplete
     clips:
     - {fileID: 8300000, guid: c26fd320b3f29e64cbb8021529617320, type: 3}
     mixer: {fileID: -4318291175376192582, guid: 50d3e551dea59504486677413d101180, type: 2}
